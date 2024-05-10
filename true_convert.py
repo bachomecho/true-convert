@@ -23,9 +23,9 @@ for cell in data_j['cells']:
     if cell['cell_type'] == 'code':
         if '# %%' in cell['source'][0]:
             cell['source'] = cell['source'][1:]
-        code_length = len(cell['source'])
-        for idx, line in enumerate(cell['source']):
-            if idx > code_length - 10 and line == '\n':
+
+        for line in cell['source'][::-1]:
+            if not line or line == '\n':
                 cell['source'].remove(line)
         cell['source'][-1] = cell['source'][-1].strip()
 
