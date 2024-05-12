@@ -24,9 +24,18 @@ for cell in data_j['cells']:
         if '# %%' in cell['source'][0]:
             cell['source'] = cell['source'][1:]
 
-        for line in cell['source'][::-1]:
-            if not line or line == '\n':
-                cell['source'].remove(line)
+        for idx in range(len(cell['source'])):
+            if cell['source'][idx] != '\n':
+                print(f'idx: {idx}, line: {cell["source"][idx]}')
+                cell['source'] = cell['source'][idx:]
+                break
+
+        for idx in reversed(range(len(cell['source']))):
+            if cell['source'][idx] != '\n':
+                print(f'idx: {idx}, line: {cell["source"][idx]}')
+                cell['source'] = cell['source'][:idx+1]
+                break
+
         cell['source'][-1] = cell['source'][-1].strip()
 
 
