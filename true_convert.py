@@ -36,7 +36,7 @@ for cell in data_j['cells']:
                 cell['source'] = cell['source'][:idx+1]
                 break
 
-        cell['source'][-1] = cell['source'][-1].strip()
+    cell['source'][-1] = cell['source'][-1].rstrip()
 
 
 if not args.output:
@@ -50,5 +50,7 @@ if not args.output:
 else:
     with open(args.output, 'w') as result:
         result.write(json.dumps(data_j))
+
+print('[+] Finished clean up process for notebook.')
 
 
